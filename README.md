@@ -36,8 +36,6 @@ docker run --rm -p 8000:8000 -v "${PWD}/data:/app/data" ghcr.io/tpatzelt/ip-trac
 Environment variables (optional):
 
 ```bash
-PUID=1000
-PGID=1000
 TZ=Europe/Berlin
 IP_TRACKER_DATA_DIR=/app/data
 IP_TRACKER_HISTORY_FILE=ip_history.jsonl
@@ -55,8 +53,10 @@ services:
       - "8000:8000"
     volumes:
       - ./data:/app/data
+    user: "${PUID:-1000}:${PGID:-1000}"
     environment:
       IP_TRACKER_INTERVAL_MINUTES: "720"
+    env_file: .env
 ```
 
 ## Configuration
