@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ app_title }}</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <p class="label">{{ app_title }}</p>
+          <h1>IP change dashboard</h1>
+          <p class="subtitle">Track how your public IP shifts over time in a focused, neon-tuned panel.</p>
+        </div>
+        <div class="status">
+          <div class="chip">Timezone: Europe/Berlin</div>
+          <div class="chip">Fetch: {{ interval_label }}</div>
+        </div>
+      </header>
+
+      <section class="stats">
+        <div class="card">
+          <p class="card-label">Total samples</p>
+          <p class="card-value" id="total-samples">0</p>
+        </div>
+        <div class="card">
+          <p class="card-label">IP changes</p>
+          <p class="card-value" id="ip-changes">0</p>
+        </div>
+        <div class="card">
+          <p class="card-label">Change frequency</p>
+          <p class="card-value" id="change-frequency">-</p>
+          <p class="card-sub" id="change-window">-</p>
+        </div>
+        <div class="card">
+          <p class="card-label">Latest IP</p>
+          <p class="card-value" id="latest-ip">-</p>
+        </div>
+      </section>
+
+      <section class="timeline">
+        <div class="panel-header">
+          <h2>Timeline</h2>
+          <p>Most recent entries appear first.</p>
+        </div>
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>IP Address</th>
+                <th>Changed</th>
+              </tr>
+            </thead>
+            <tbody id="timeline-body">
+              <tr>
+                <td colspan="3" class="empty">No samples yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      window.__IP_HISTORY__ = {{ history | tojson }};
+    </script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

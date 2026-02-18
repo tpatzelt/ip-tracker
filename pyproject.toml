@@ -1,0 +1,16 @@
+[project]
+name = "ip-tracker"
+version = "0.1.0"
+description = "Tracks your public IP over time with a FastAPI dashboard."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "apscheduler",
+  "httpx",
+  "jinja2",
+]
+
+[dependency-groups]
+dev = []
