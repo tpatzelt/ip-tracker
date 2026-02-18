@@ -15,7 +15,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 APP_TITLE = "IP Tracker"
-TIMEZONE = ZoneInfo("Europe/Berlin")
+TZ_NAME = os.environ.get("TZ", "Europe/Berlin")
+TIMEZONE = ZoneInfo(TZ_NAME)
 
 DATA_DIR = Path(os.environ.get("IP_TRACKER_DATA_DIR", "data"))
 HISTORY_FILE = DATA_DIR / os.environ.get("IP_TRACKER_HISTORY_FILE", "ip_history.jsonl")
@@ -125,6 +126,7 @@ async def dashboard(request: Request) -> HTMLResponse:
             "history": history,
             "app_title": APP_TITLE,
             "interval_label": interval_label,
+            "tz_name": TZ_NAME,
         },
     )
 
