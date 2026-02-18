@@ -5,13 +5,14 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir uv
+COPY pyproject.toml README.md /app/
 
-COPY pyproject.toml uv.lock README.md /app/
-
-RUN uv pip compile pyproject.toml --no-dev -o /tmp/requirements.txt \
-    && pip install --no-cache-dir -r /tmp/requirements.txt \
-    && rm -f /tmp/requirements.txt
+RUN pip install --no-cache-dir \
+    fastapi \
+    uvicorn \
+    apscheduler \
+    httpx \
+    jinja2
 
 COPY app /app/app
 
