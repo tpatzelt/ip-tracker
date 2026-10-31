@@ -120,9 +120,9 @@ async def dashboard(request: Request) -> HTMLResponse:
     interval_minutes = _parse_interval_minutes(INTERVAL_MINUTES_RAW)
     interval_label = _format_interval_label(interval_minutes)
     return templates.TemplateResponse(
+        request,
         "dashboard.html",
         {
-            "request": request,
             "history": history,
             "app_title": APP_TITLE,
             "interval_label": interval_label,
